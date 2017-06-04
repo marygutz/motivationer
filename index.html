@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Panels 💪</title>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <style>
+    html {
+        box-sizing: border-box;
+        background: #ffc600;
+        font-family: 'helvetica neue';
+        font-size: 3rem;
+        font-weight: 200;
+    }
+  .small {font-size: 1rem;}
+    
+    body {
+        margin: 0;
+    }
+    
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+    
+    .panels {
+        min-height: 100vh;
+        overflow: hidden;
+        display: flex;
+    }
+    
+    .panel {
+        background: #6B0F9C;
+        box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+        color: white;
+        text-align: center;
+        align-items: center;
+        /* Safari transitionend event.propertyName === flex */
+        /* Chrome + FF transitionend event.propertyName === flex-grow */
+        transition: font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11), flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11), background 0.2s;
+        font-size: 20px;
+        background-size: cover;
+        background-position: center;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .panel1 {
+        background-image: url(https://source.unsplash.com/2PODhmrvLik/1500x1500);
+    }
+    
+    .panel2 {
+        background-image: url(https://source.unsplash.com/kptGqst08Gg/1500x1500);
+    }
+    
+    .panel3 {
+        background-image: url(https://source.unsplash.com/a4iJ_Oa8Knk/1500x1500);
+    }
+    
+    .panel4 {
+        background-image: url(https://source.unsplash.com/b3iMnze2xRQ/1500x1500);
+    }
+    
+    .panel5 {
+        background-image: url(https://source.unsplash.com/MnwlDmTelTM/1500x1500);
+    }
+    
+    .panel > * {
+        margin: 0;
+        width: 100%;
+        transition: transform 0.5s;
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .panel > *:first-child {
+        transform: translateY(-100%);
+    }
+    
+    .panel > *:last-child {
+        transform: translateY(100%);
+    }
+    
+    .panel.open-active > *:first-child,
+    .panel.open-active > *:last-child {
+        transform: translateY(0);
+    }
+    
+    .panel p {
+        text-transform: uppercase;
+        font-family: 'Amatic SC', cursive;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+        font-size: 2rem;
+    }
+    
+    .panel p:nth-child(3) {
+        font-size: 1rem;
+    }
+    
+    .panel.open {
+      flex: 5;
+        font-size: 4rem;
+    }
+    </style>
+    <div class="panels">
+        <div class="panel panel1">
+            <p></p>
+            <p>trust</p>
+            <p>yourself</p>
+        </div>
+        <div class="panel panel2">
+            <p></p>
+            <p>look</p>
+            <p>up</p>
+        </div>
+        <div class="panel panel3">
+            <p></p>
+            <p>try</p>
+            <p>Again</p>
+        </div>
+        <div class="panel panel4">
+            <p></p>
+            <p>be</p>
+            <p>fearless</p>
+        </div>
+        <div class="panel panel5">
+            <p></p>
+            <p>thank</p>
+            <p>You</p>
+        </div>
+    </div>
+    <script>
+    // todo: close panel when another is clicked
+    
+    const panels = document.querySelectorAll('.panel');
+    function toggleOpen(){
+        console.log(this);
+      this.classList.toggle('open');
+    }
+    function toggleActive(e){
+      if (e.propertyName.includes('flex')){
+      this.classList.toggle('open-active');
+      }
+    }
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+    </script>
+</body>
+
+</html>
