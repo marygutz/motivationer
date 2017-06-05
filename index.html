@@ -3,20 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Flex Panels 💪</title>
-    <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+    <title>Motivationer - a flex panel gallery project</title>
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
 </head>
 
 <body>
     <style>
     html {
         box-sizing: border-box;
-        background: #ffc600;
-        font-family: 'helvetica neue';
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
         font-size: 3rem;
-        font-weight: 200;
     }
-  .small {font-size: 1rem;}
     
     body {
         margin: 0;
@@ -28,29 +25,49 @@
         box-sizing: inherit;
     }
     
+    .script {
+        font-family: 'Great Vibes', cursive;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .intro {
+        min-height: 10vh;
+    }
+    
     .panels {
-        min-height: 100vh;
+        min-height: 90vh;
         overflow: hidden;
         display: flex;
     }
     
     .panel {
-        background: #6B0F9C;
-        box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
-        color: white;
+        background: #ffb707;
+        color: #333;
         text-align: center;
         align-items: center;
         /* Safari transitionend event.propertyName === flex */
         /* Chrome + FF transitionend event.propertyName === flex-grow */
         transition: font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11), flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11), background 0.2s;
-        font-size: 20px;
         background-size: cover;
         background-position: center;
         flex: 1;
+        font-size: 1rem;
         justify-content: center;
         align-items: center;
         display: flex;
         flex-direction: column;
+    }
+    
+    .panel span {
+        background: rgba(72, 71, 72, 0.5);
+        line-height: 1;
+        padding: 20px 0;
+        margin: 0;
+        width: 80%;
+        color: #fff;
     }
     
     .panel1 {
@@ -83,74 +100,73 @@
         align-items: center;
     }
     
-    .panel > *:first-child {
-        transform: translateY(-100%);
-    }
-    
     .panel > *:last-child {
         transform: translateY(100%);
     }
     
-    .panel.open-active > *:first-child,
     .panel.open-active > *:last-child {
         transform: translateY(0);
     }
     
-    .panel p {
-        text-transform: uppercase;
-        font-family: 'Amatic SC', cursive;
-        text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
-        font-size: 2rem;
+    .panel p.script {
+        color: #fff;
+        transition: font-size 0.5s ease-in-out
     }
     
-    .panel p:nth-child(3) {
+    .panel p:nth-child(2) {
         font-size: 1rem;
+        text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.70);
+    }
+    
+    .panel.open-active p:nth-child(2) {
+        font-size: 3rem;
+        overflow: hidden;
     }
     
     .panel.open {
-      flex: 5;
-        font-size: 4rem;
+        flex: 5;
+        font-size: 1rem;
     }
     </style>
+    <div class="intro text-center">Motivationer Gallery</div>
     <div class="panels">
         <div class="panel panel1">
-            <p></p>
-            <p>trust</p>
-            <p>yourself</p>
+            <p><span>trust</span></p>
+            <p class="script">yourself</p>
         </div>
         <div class="panel panel2">
-            <p></p>
-            <p>look</p>
-            <p>up</p>
+            <p><span>look</span></p>
+            <p class="script">up</p>
         </div>
         <div class="panel panel3">
-            <p></p>
-            <p>try</p>
-            <p>Again</p>
+            <p><span>try</span></p>
+            <p class="script">Again</p>
         </div>
         <div class="panel panel4">
-            <p></p>
-            <p>be</p>
-            <p>fearless</p>
+            <p><span>be</span></p>
+            <p class="script">fearless</p>
         </div>
         <div class="panel panel5">
-            <p></p>
-            <p>thank</p>
-            <p>You</p>
+            <p><span>thank</span></p>
+            <p class="script">You</p>
         </div>
     </div>
     <script>
-    // todo: close panel when another is clicked
-    
     const panels = document.querySelectorAll('.panel');
-    function toggleOpen(){
-        console.log(this);
-      this.classList.toggle('open');
+
+    function toggleOpen() {
+        this.classList.toggle('open');
+        panels.forEach(panel => {
+            if (panel != this) {
+                panel.classList.remove('open')
+            }
+        })
     }
-    function toggleActive(e){
-      if (e.propertyName.includes('flex')){
-      this.classList.toggle('open-active');
-      }
+
+    function toggleActive(e) {
+        if (e.propertyName.includes('flex')) {
+            this.classList.toggle('open-active');
+        }
     }
     panels.forEach(panel => panel.addEventListener('click', toggleOpen));
     panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
