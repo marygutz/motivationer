@@ -1,6 +1,10 @@
 # motivationer
 
-A side by side gallery built with flexbox and a little javascript
+A side by side gallery sprinkled with motivation (because who doesn't need a piece of that) built with flexbox and a little javascript
+
+## Getting Started
+
+Replace the images and text to customize as you like.
 
 ## License
 
